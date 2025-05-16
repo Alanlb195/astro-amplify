@@ -1,5 +1,12 @@
 ---
+import { getPokemonsPaginated } from "@/actions/pokemons/get-pokemons-paginated";
 
+const { data: pokemons, error } = await Astro.callAction(getPokemonsPaginated, {
+	limit: 10,
+	offset: 0,
+});
+
+if (error) throw new Error("error", error);
 ---
 
 <html lang="en">
@@ -11,6 +18,10 @@
 		<title>Astro</title>
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<pre>
+			{
+				JSON.stringify(pokemons, null, 2)
+			}
+		</pre>
 	</body>
 </html>
